@@ -3,7 +3,7 @@ import mongoose, { Schema, type Document } from "mongoose";
 export interface IUser extends Document {
   name: string;
   email: string;
-  role: "candidate" | "recruiter" | null;
+  role: "candidate" | "recruiter" | "orgadmin" | null;
   organizationId: mongoose.Types.ObjectId | null;
   isOrgAdmin: boolean;
 }
@@ -15,7 +15,7 @@ const userSchema = new Schema<IUser>(
     email: { type: String },
     role: {
       type: String,
-      enum: ["candidate", "recruiter", null],
+      enum: ["candidate", "recruiter", "orgadmin", null],
       default: null,
     },
     organizationId: {

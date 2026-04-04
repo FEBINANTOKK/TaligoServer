@@ -24,3 +24,16 @@ export async function selectRole(req: Request, res: Response) {
     return sendError(res, "Failed to select role", 500);
   }
 }
+
+export async function getMe(req: Request, res: Response) {
+  try {
+    const user = req.user!;
+    return sendSuccess(res, "User details fetched", {
+      role: user.role,
+      organizationId: user.organizationId,
+      isOrgAdmin: user.isOrgAdmin,
+    });
+  } catch (err) {
+    return sendError(res, "Failed to fetch user details", 500);
+  }
+}
