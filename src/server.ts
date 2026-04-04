@@ -5,6 +5,8 @@ import { toNodeHandler } from "better-auth/node";
 import { connectDB } from "./config/db";
 import { initAuth, getAuth } from "./config/auth";
 import protectedRoutes from "./routes/protected";
+import userRoutes from "./routes/user.routes";
+import organizationRoutes from "./routes/organization.routes";
 import { errorHandler } from "./middleware/error.middleware";
 import { requireAuth } from "./middleware/auth.middleware";
 
@@ -31,6 +33,8 @@ app.use(express.json());
 
 // Routes
 app.use(protectedRoutes);
+app.use(userRoutes);
+app.use(organizationRoutes);
 
 // Health check
 app.get("/api/health", requireAuth, (_req, res) => {

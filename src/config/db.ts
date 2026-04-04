@@ -1,4 +1,5 @@
 import { MongoClient, type Db } from "mongodb";
+import mongoose from "mongoose";
 
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/myapp";
 
@@ -10,6 +11,9 @@ export async function connectDB(): Promise<void> {
     await client.connect();
     _db = client.db();
     console.log(`Connected to MongoDB: ${_db.databaseName}`);
+
+    await mongoose.connect(MONGO_URI);
+    console.log("Mongoose connected");
   } catch (error) {
     console.error("MongoDB connection error:", error);
     process.exit(1);
