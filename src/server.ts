@@ -9,6 +9,8 @@ import userRoutes from "./routes/user.routes";
 import organizationRoutes from "./routes/organization.routes";
 import jobRoutes from "./routes/job.routes";
 import applicationRoutes from "./routes/application.routes";
+import candidateProfileRoutes from "./routes/candidateProfile.routes";
+import employerProfileRoutes from "./routes/employerProfile.routes";
 import { errorHandler } from "./middleware/error.middleware";
 import { requireAuth } from "./middleware/auth.middleware";
 
@@ -39,6 +41,8 @@ app.use(userRoutes);
 app.use(organizationRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/applications", applicationRoutes);
+app.use("/api/profile", candidateProfileRoutes);
+app.use("/api/employer-profile", employerProfileRoutes);
 
 // Health check
 app.get("/api/health", requireAuth, (_req, res) => {
