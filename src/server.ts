@@ -8,6 +8,7 @@ import protectedRoutes from "./routes/protected";
 import userRoutes from "./routes/user.routes";
 import organizationRoutes from "./routes/organization.routes";
 import jobRoutes from "./routes/job.routes";
+import applicationRoutes from "./routes/application.routes";
 import { errorHandler } from "./middleware/error.middleware";
 import { requireAuth } from "./middleware/auth.middleware";
 
@@ -18,7 +19,7 @@ app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
@@ -37,6 +38,7 @@ app.use(protectedRoutes);
 app.use(userRoutes);
 app.use(organizationRoutes);
 app.use("/api/jobs", jobRoutes);
+app.use("/api/applications", applicationRoutes);
 
 // Health check
 app.get("/api/health", requireAuth, (_req, res) => {
