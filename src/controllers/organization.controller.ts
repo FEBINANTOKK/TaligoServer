@@ -7,9 +7,11 @@ export async function createOrganization(req: Request, res: Response) {
   try {
     const { name } = req.body;
     const user = req.user!;
+    console.log(name);
+    console.log("Backend");
 
     if (!name || typeof name !== "string" || !name.trim()) {
-      return sendError(res, "Organization name is required");
+      return sendError(res, "Organization name is required, Backend");
     }
 
     if (user.organizationId) {
@@ -23,7 +25,7 @@ export async function createOrganization(req: Request, res: Response) {
       joinCode,
     });
 
-    user.role = "recruiter";
+    user.role = "orgadmin";
     user.organizationId = org._id;
     user.isOrgAdmin = true;
     await user.save();
