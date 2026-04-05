@@ -7,6 +7,7 @@ import { initAuth, getAuth } from "./config/auth";
 import protectedRoutes from "./routes/protected";
 import userRoutes from "./routes/user.routes";
 import organizationRoutes from "./routes/organization.routes";
+import jobRoutes from "./routes/job.routes";
 import { errorHandler } from "./middleware/error.middleware";
 import { requireAuth } from "./middleware/auth.middleware";
 
@@ -35,6 +36,7 @@ app.use(express.json());
 app.use(protectedRoutes);
 app.use(userRoutes);
 app.use(organizationRoutes);
+app.use("/api/jobs", jobRoutes);
 
 // Health check
 app.get("/api/health", requireAuth, (_req, res) => {
